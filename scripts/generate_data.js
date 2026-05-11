@@ -215,12 +215,13 @@ const buildRoutes = (stations) => {
 
   for (const route of routeMap.values()) {
     route.stations = [...new Set(route.stations)];
-    route.coordinates = route.coordinates
-      .filter(([lng, lat]) => Number.isFinite(lng) && Number.isFinite(lat))
-      .sort((a, b) => b[0] - a[0]);
+    // 仅做坐标合法性过滤，保留站点原始加入顺序，避免错误重排线路走向。
+    route.coordinates = route.coordinates.filter(
+      ([lng, lat]) => Number.isFinite(lng) && Number.isFinite(lat)
+    );
 
     // 生成模拟车次：线路名前两个字拼接序号。
-    const prefix = (route.name.replace(/高铁|线路/g, "").slice(0, 2) || "G").toUpperCase();
+    const prefix = route.name.replace(/高铁|线路/g, "").slice(0, 2) || "G";
     route.trains = [1, 2, 3, 4, 5].map((n) => `${prefix}${(n * 7).toString().padStart(2, "0")}`);
   }
 

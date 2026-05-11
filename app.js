@@ -21,6 +21,9 @@ const state = {
   highlightLayerGroup: null
 };
 
+/** 线路车次缺失时使用的默认模拟车次。 */
+const DEFAULT_TRAIN_CODES = ["G101", "G103", "G105"];
+
 /** 颜色映射：波特尔等级越高（越亮），颜色越偏红。 */
 const getBortleColor = (bortle) => {
   if (bortle <= 3) return "#22c55e";
@@ -155,7 +158,7 @@ function initRouteSelector() {
 
 /** 渲染模拟车次列表。 */
 function renderTrainList(route) {
-  const trains = Array.isArray(route.trains) && route.trains.length ? route.trains : ["G101", "G103", "G105"];
+  const trains = Array.isArray(route.trains) && route.trains.length ? route.trains : DEFAULT_TRAIN_CODES;
   trainListEl.innerHTML = trains.map((code) => `<li class="rounded bg-slate-800/70 px-2 py-1">${code}</li>`).join("");
 }
 
