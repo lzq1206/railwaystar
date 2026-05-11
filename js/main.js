@@ -1,4 +1,4 @@
-import { DATA_SOURCES } from "./config.js";
+import { DATA_SOURCES, DEFAULT_TRAIN_CODES } from "./config.js";
 import { loadData } from "./data-loader.js";
 import { createMap, createLineLayer, updateLineHighlight, clearLayerGroup } from "./map.js";
 import { estimateLightPollution, getBortleScale, describeSky } from "./light-pollution.js";
@@ -88,7 +88,7 @@ const init = async () => {
       }
 
       updateLineHighlight(lineLayer, lineName);
-      renderTrainList(lineFeature.properties.trainCodes || ["G1001", "G1003", "G1005"]);
+      renderTrainList(lineFeature.properties.trainCodes || DEFAULT_TRAIN_CODES);
 
       const rankedStations = getLineStations(lineFeature, data.stationDict, data.lightRef);
       renderDarkStationRank(rankedStations);

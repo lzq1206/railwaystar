@@ -30,3 +30,5 @@ export const BASEMAP = {
       '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions" target="_blank" rel="noopener noreferrer">CARTO</a>'
   }
 };
+
+export const DEFAULT_TRAIN_CODES = ["G1001", "G1003", "G1005"];
