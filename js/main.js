@@ -58,7 +58,7 @@ const markerStyleByRank = (rank) => {
   return { color: "#22d3ee", fillColor: "#22d3ee", radius: 4, weight: 1, fillOpacity: 0.75 };
 };
 
-const isLikelyHighSpeedLine = (name = "") => /高铁|客专|城际|京沪|京广|沪昆|兰新/.test(name);
+const matchesHighSpeedPattern = (name = "") => /高铁|客专|城际|京沪|京广|沪昆|兰新/.test(name);
 
 const init = async () => {
   setLoading(true);
@@ -68,7 +68,7 @@ const init = async () => {
     const map = createMap();
 
     const lines = data.lineGeoJson.features.filter((feature) =>
-      isLikelyHighSpeedLine(feature?.properties?.name)
+      matchesHighSpeedPattern(feature?.properties?.name)
     );
 
     const stationLayerGroup = L.layerGroup().addTo(map);

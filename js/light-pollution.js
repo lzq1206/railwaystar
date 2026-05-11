@@ -1,4 +1,5 @@
 const normalizeLightValue = (value) => Math.max(5, Math.min(99, Math.round(value)));
+const MIN_DISTANCE_SQ = 0.05;
 
 const distanceSquared = (a, b) => {
   const lngDiff = a.lng - b.lng;
@@ -14,7 +15,7 @@ export const estimateLightPollution = (station, refs) => {
   const weighted = refs.reduce(
     (acc, ref) => {
       const dist = distanceSquared(station, ref);
-      const w = 1 / Math.max(dist, 0.05);
+      const w = 1 / Math.max(dist, MIN_DISTANCE_SQ);
       acc.weightedSum += w * ref.value;
       acc.weights += w;
       return acc;
