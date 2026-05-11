@@ -221,7 +221,10 @@ const buildRoutes = (stations) => {
     );
 
     // 生成模拟车次：线路名前两个字拼接序号。
-    const prefix = route.name.replace(/高铁|线路/g, "").slice(0, 2) || "G";
+    const compactName = route.name
+      .replace(/高铁|线路|High[- ]?Speed|Railway/gi, "")
+      .replace(/[^\u4e00-\u9fa5A-Za-z0-9]/g, "");
+    const prefix = compactName.slice(0, 2) || "G";
     route.trains = [1, 2, 3, 4, 5].map((n) => `${prefix}${(n * 7).toString().padStart(2, "0")}`);
   }
 

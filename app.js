@@ -185,7 +185,7 @@ function findTopDarkStations(route) {
     .sort((a, b) => {
       // 第一优先级：波特尔等级更低
       if (a.bortle !== b.bortle) return a.bortle - b.bortle;
-      // 第二优先级：观星指数更高
+      // 第二优先级（同级平手时）：观星指数更高
       return b.stargazingIndex - a.stargazingIndex;
     });
 
