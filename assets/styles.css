@@ -1,0 +1,9 @@
+#map {
+  background: radial-gradient(circle at center, #0f172a, #020617);
+}
+
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+  background: #0f172a;
+  color: #e2e8f0;
+}
