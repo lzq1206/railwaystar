@@ -1,0 +1,515 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.385,
+          39.87
+        ]
+      },
+      "properties": {
+        "id": "fallback-0",
+        "name": "北京南",
+        "lineNames": [
+          "京沪高铁"
+        ],
+        "routes": [
+          "京沪高铁"
+        ],
+        "bortle": 8,
+        "lightPollution": 8,
+        "stargazingIndex": 22
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          117.357,
+          38.99
+        ]
+      },
+      "properties": {
+        "id": "fallback-1",
+        "name": "天津南",
+        "lineNames": [
+          "京沪高铁"
+        ],
+        "routes": [
+          "京沪高铁"
+        ],
+        "bortle": 9,
+        "lightPollution": 9,
+        "stargazingIndex": 11
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.98,
+          36.65
+        ]
+      },
+      "properties": {
+        "id": "fallback-2",
+        "name": "济南西",
+        "lineNames": [
+          "京沪高铁"
+        ],
+        "routes": [
+          "京沪高铁"
+        ],
+        "bortle": 8,
+        "lightPollution": 8,
+        "stargazingIndex": 22
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          117.29,
+          34.28
+        ]
+      },
+      "properties": {
+        "id": "fallback-3",
+        "name": "徐州东",
+        "lineNames": [
+          "京沪高铁"
+        ],
+        "routes": [
+          "京沪高铁"
+        ],
+        "bortle": 8,
+        "lightPollution": 8,
+        "stargazingIndex": 22
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          118.79,
+          31.98
+        ]
+      },
+      "properties": {
+        "id": "fallback-4",
+        "name": "南京南",
+        "lineNames": [
+          "京沪高铁"
+        ],
+        "routes": [
+          "京沪高铁"
+        ],
+        "bortle": 9,
+        "lightPollution": 9,
+        "stargazingIndex": 11
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.317,
+          31.197
+        ]
+      },
+      "properties": {
+        "id": "fallback-5",
+        "name": "上海虹桥",
+        "lineNames": [
+          "京沪高铁",
+          "沪昆高铁"
+        ],
+        "routes": [
+          "京沪高铁",
+          "沪昆高铁"
+        ],
+        "bortle": 9,
+        "lightPollution": 9,
+        "stargazingIndex": 11
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.322,
+          39.894
+        ]
+      },
+      "properties": {
+        "id": "fallback-6",
+        "name": "北京西",
+        "lineNames": [
+          "京广高铁"
+        ],
+        "routes": [
+          "京广高铁"
+        ],
+        "bortle": 8,
+        "lightPollution": 8,
+        "stargazingIndex": 22
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.478,
+          38.03
+        ]
+      },
+      "properties": {
+        "id": "fallback-7",
+        "name": "石家庄",
+        "lineNames": [
+          "京广高铁"
+        ],
+        "routes": [
+          "京广高铁"
+        ],
+        "bortle": 8,
+        "lightPollution": 8,
+        "stargazingIndex": 22
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          113.71,
+          34.75
+        ]
+      },
+      "properties": {
+        "id": "fallback-8",
+        "name": "郑州东",
+        "lineNames": [
+          "京广高铁"
+        ],
+        "routes": [
+          "京广高铁"
+        ],
+        "bortle": 7,
+        "lightPollution": 7,
+        "stargazingIndex": 33
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.43,
+          30.61
+        ]
+      },
+      "properties": {
+        "id": "fallback-9",
+        "name": "武汉",
+        "lineNames": [
+          "京广高铁"
+        ],
+        "routes": [
+          "京广高铁"
+        ],
+        "bortle": 8,
+        "lightPollution": 8,
+        "stargazingIndex": 22
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          113,
+          28.16
+        ]
+      },
+      "properties": {
+        "id": "fallback-10",
+        "name": "长沙南",
+        "lineNames": [
+          "京广高铁",
+          "沪昆高铁"
+        ],
+        "routes": [
+          "京广高铁",
+          "沪昆高铁"
+        ],
+        "bortle": 6,
+        "lightPollution": 6,
+        "stargazingIndex": 44
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          113.27,
+          22.99
+        ]
+      },
+      "properties": {
+        "id": "fallback-11",
+        "name": "广州南",
+        "lineNames": [
+          "京广高铁"
+        ],
+        "routes": [
+          "京广高铁"
+        ],
+        "bortle": 7,
+        "lightPollution": 7,
+        "stargazingIndex": 33
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          103.73,
+          36.03
+        ]
+      },
+      "properties": {
+        "id": "fallback-12",
+        "name": "兰州西",
+        "lineNames": [
+          "兰新高铁"
+        ],
+        "routes": [
+          "兰新高铁"
+        ],
+        "bortle": 5,
+        "lightPollution": 5,
+        "stargazingIndex": 56
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.77,
+          36.62
+        ]
+      },
+      "properties": {
+        "id": "fallback-13",
+        "name": "西宁",
+        "lineNames": [
+          "兰新高铁"
+        ],
+        "routes": [
+          "兰新高铁"
+        ],
+        "bortle": 5,
+        "lightPollution": 5,
+        "stargazingIndex": 56
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.44,
+          38.93
+        ]
+      },
+      "properties": {
+        "id": "fallback-14",
+        "name": "张掖西",
+        "lineNames": [
+          "兰新高铁"
+        ],
+        "routes": [
+          "兰新高铁"
+        ],
+        "bortle": 6,
+        "lightPollution": 6,
+        "stargazingIndex": 44
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.28,
+          39.78
+        ]
+      },
+      "properties": {
+        "id": "fallback-15",
+        "name": "嘉峪关南",
+        "lineNames": [
+          "兰新高铁"
+        ],
+        "routes": [
+          "兰新高铁"
+        ],
+        "bortle": 6,
+        "lightPollution": 6,
+        "stargazingIndex": 44
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          93.53,
+          42.83
+        ]
+      },
+      "properties": {
+        "id": "fallback-16",
+        "name": "哈密",
+        "lineNames": [
+          "兰新高铁"
+        ],
+        "routes": [
+          "兰新高铁"
+        ],
+        "bortle": 4,
+        "lightPollution": 4,
+        "stargazingIndex": 67
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          87.6,
+          43.86
+        ]
+      },
+      "properties": {
+        "id": "fallback-17",
+        "name": "乌鲁木齐",
+        "lineNames": [
+          "兰新高铁"
+        ],
+        "routes": [
+          "兰新高铁"
+        ],
+        "bortle": 4,
+        "lightPollution": 4,
+        "stargazingIndex": 67
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.21,
+          30.29
+        ]
+      },
+      "properties": {
+        "id": "fallback-18",
+        "name": "杭州东",
+        "lineNames": [
+          "沪昆高铁"
+        ],
+        "routes": [
+          "沪昆高铁"
+        ],
+        "bortle": 9,
+        "lightPollution": 9,
+        "stargazingIndex": 11
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.86,
+          28.62
+        ]
+      },
+      "properties": {
+        "id": "fallback-19",
+        "name": "南昌西",
+        "lineNames": [
+          "沪昆高铁"
+        ],
+        "routes": [
+          "沪昆高铁"
+        ],
+        "bortle": 7,
+        "lightPollution": 7,
+        "stargazingIndex": 33
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.67,
+          26.62
+        ]
+      },
+      "properties": {
+        "id": "fallback-20",
+        "name": "贵阳北",
+        "lineNames": [
+          "沪昆高铁"
+        ],
+        "routes": [
+          "沪昆高铁"
+        ],
+        "bortle": 6,
+        "lightPollution": 6,
+        "stargazingIndex": 44
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.83,
+          24.88
+        ]
+      },
+      "properties": {
+        "id": "fallback-21",
+        "name": "昆明南",
+        "lineNames": [
+          "沪昆高铁"
+        ],
+        "routes": [
+          "沪昆高铁"
+        ],
+        "bortle": 6,
+        "lightPollution": 6,
+        "stargazingIndex": 44
+      }
+    }
+  ]
+}
