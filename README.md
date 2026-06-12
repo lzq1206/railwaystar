@@ -5,7 +5,7 @@
 ## 功能
 
 - 自动加载 `./data/high-speed-railway.json`
-- 使用 Leaflet + 深色底图 + NASA VIIRS 夜间灯光叠加
+- 使用 Leaflet + 高德地图底图 + NASA VIIRS 夜间灯光叠加
 - 支持线路搜索、线路选择、暗夜站点排行
 - 点击站点查看光污染估值与暗空等级
 
