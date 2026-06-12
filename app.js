@@ -387,6 +387,7 @@ const createMap = () => {
 
     if (!state.overlayMap && window.L) {
       state.overlayMap = L.map(dom.nightOverlay, {
+        crs: L.CRS.EPSG3857,
         zoomControl: false,
         attributionControl: false,
         interactive: false,
@@ -397,8 +398,9 @@ const createMap = () => {
         boxZoom: false,
         touchZoom: false,
         preferCanvas: true,
-        zoomSnap: 0.1,
-        zoomDelta: 0.5,
+        zoomSnap: 0,
+        zoomDelta: 0.25,
+        worldCopyJump: true,
         fadeAnimation: false,
         zoomAnimation: false,
         inertia: false
@@ -412,6 +414,8 @@ const createMap = () => {
         crossOrigin: true,
         noWrap: true
       }).addTo(state.overlayMap);
+
+      state.overlayMap.invalidateSize(true);
     }
 
     if (!map.getSource("selected-route")) {
@@ -457,11 +461,13 @@ const createMap = () => {
       if (!state.overlayMap) return;
       const center = map.getCenter();
       state.overlayMap.setView([center.lat, center.lng], map.getZoom(), { animate: false });
+      state.overlayMap.invalidateSize(false);
     };
 
     syncOverlay();
-    map.on("move", syncOverlay);
-    map.on("zoom", syncOverlay);
+    map.on("moveend", syncOverlay);
+    map.on("zoomend", syncOverlay);
+    map.on("resize", syncOverlay);
   });
 
   return map;
