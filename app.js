@@ -1,4 +1,4 @@
-import { DATA_SOURCES } from "./js/config.js";
+import { DATA_SOURCES, LIGHT_POLLUTION_TILE } from "./js/config.js";
 import { loadData } from "./js/data-loader.js";
 import { estimateLightPollution, getBortleScale, describeSky } from "./js/light-pollution.js";
 
@@ -382,6 +382,36 @@ const createMap = () => {
 
   map.on("load", () => {
     dom.statusPill.textContent = "RailsMaps tiles live";
+
+    if (!map.getSource("night-lights")) {
+      map.addSource("night-lights", {
+        type: "raster",
+        tiles: [LIGHT_POLLUTION_TILE.url],
+        tileSize: LIGHT_POLLUTION_TILE.options.tileSize,
+        attribution: LIGHT_POLLUTION_TILE.options.attribution,
+        maxzoom: LIGHT_POLLUTION_TILE.options.maxZoom
+      });
+    }
+
+    if (!map.getLayer("night-lights-overlay")) {
+      map.addLayer(
+        {
+          id: "night-lights-overlay",
+          type: "raster",
+          source: "night-lights",
+          paint: {
+            "raster-opacity": LIGHT_POLLUTION_TILE.options.opacity,
+            "raster-fade-duration": 0,
+            "raster-brightness-min": 0.1,
+            "raster-brightness-max": 1.08,
+            "raster-saturation": -0.12,
+            "raster-contrast": 0.08
+          }
+        },
+        "places"
+      );
+    }
+
     if (!map.getSource("selected-route")) {
       map.addSource("selected-route", {
         type: "geojson",
