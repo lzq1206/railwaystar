@@ -3,87 +3,81 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#050816" />
     <title>China Railway Dark Sky Map | 中国高铁暗夜巡礼地图</title>
 
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Leaflet CSS -->
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-      crossorigin=""
-    />
-
-    <style>
-      html,
-      body,
-      #map {
-        width: 100%;
-        height: 100%;
-        margin: 0;
-      }
-
-      .star-marker {
-        animation: twinkle 1.2s infinite ease-in-out;
-        color: #fef08a;
-        text-shadow: 0 0 8px #fde047;
-        font-size: 20px;
-        line-height: 20px;
-      }
-
-      @keyframes twinkle {
-        0%,
-        100% {
-          transform: scale(0.9);
-          opacity: 0.55;
-        }
-        50% {
-          transform: scale(1.2);
-          opacity: 1;
-        }
-      }
-    </style>
+    <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
+    <link rel="stylesheet" href="./assets/styles.css" />
   </head>
 
-  <body class="bg-slate-950 text-slate-100">
-    <div class="relative h-screen w-screen overflow-hidden">
+  <body class="bg-slate-950 text-slate-100 antialiased">
+    <div class="app-shell">
       <div id="map"></div>
+      <div class="map-vignette"></div>
 
-      <!-- 半透明深色侧边栏 -->
-      <aside class="absolute left-4 top-4 z-[1000] w-80 rounded-2xl border border-slate-700/70 bg-slate-900/75 p-4 shadow-2xl backdrop-blur">
-        <h1 class="text-lg font-semibold text-cyan-300">中国高铁暗夜巡礼地图</h1>
-        <p class="mt-1 text-xs text-slate-300">沿高铁线路寻找最暗观星车站</p>
-
-        <div class="mt-4">
-          <label for="routeSelect" class="mb-1 block text-xs text-slate-400">线路选择</label>
-          <select id="routeSelect" class="w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-sm"></select>
+      <header class="glass-panel panel-top-left">
+        <div class="flex items-start justify-between gap-3">
+          <div>
+            <div class="badge">RailsMaps Edition</div>
+            <h1 class="mt-2 text-2xl font-semibold text-white">中国铁路光污染地图</h1>
+            <p class="mt-1 text-sm leading-6 text-slate-300">RailsMaps 底图 + 站点标签 + 现有暗夜评分，铁路网络会更完整一些。</p>
+          </div>
+          <span id="statusPill" class="status-pill">Loading…</span>
         </div>
 
-        <div class="mt-3">
-          <h2 class="mb-1 text-sm font-medium text-cyan-200">模拟车次列表</h2>
-          <ul id="trainList" class="space-y-1 text-xs text-slate-200"></ul>
+        <div class="mt-4 grid grid-cols-3 gap-2">
+          <div class="metric-card">
+            <div id="routeCount" class="metric-value">0</div>
+            <div class="metric-label">线路</div>
+          </div>
+          <div class="metric-card">
+            <div id="stationCount" class="metric-value">0</div>
+            <div class="metric-label">站点</div>
+          </div>
+          <div class="metric-card">
+            <div id="darkestStation" class="metric-value metric-value--sm">—</div>
+            <div class="metric-label">最暗站</div>
+          </div>
         </div>
 
-        <div class="mt-3">
-          <h2 class="mb-1 text-sm font-medium text-cyan-200">寻暗者 Top 3</h2>
-          <ol id="darkTopList" class="space-y-2 text-xs text-slate-200"></ol>
+        <div class="mt-4 space-y-3">
+          <div>
+            <label for="lineSearch" class="mb-1 block text-xs uppercase tracking-[0.24em] text-slate-400">搜索线路</label>
+            <input id="lineSearch" type="text" placeholder="输入线路名，例如 京沪 / 京广" class="ui-input" />
+          </div>
+          <div>
+            <label for="routeSelect" class="mb-1 block text-xs uppercase tracking-[0.24em] text-slate-400">线路选择</label>
+            <select id="routeSelect" class="ui-select"></select>
+          </div>
         </div>
+
+        <p id="selectionHint" class="mt-3 text-xs text-slate-400">正在加载线路数据…</p>
+      </header>
+
+      <aside class="glass-panel panel-left-bottom">
+        <section>
+          <div class="section-title">模拟车次</div>
+          <ul id="trainList" class="mt-3 flex flex-wrap gap-2"></ul>
+        </section>
+
+        <section class="mt-5">
+          <div class="section-title">寻暗者 Top 3</div>
+          <ol id="darkTopList" class="mt-3 space-y-2"></ol>
+        </section>
+
+        <section class="mt-5 rounded-2xl border border-cyan-300/10 bg-cyan-400/5 p-4">
+          <div class="text-xs uppercase tracking-[0.24em] text-cyan-200/80">地图说明</div>
+          <p class="mt-2 text-sm leading-6 text-slate-300">RailsMaps 站点层会直接显示在底图里；你当前选中的路线会以霓虹高亮叠加，暗空站点会额外打星。</p>
+        </section>
       </aside>
 
-      <!-- 车站详情卡片 -->
-      <section id="stationCard" class="absolute bottom-4 left-4 z-[1000] hidden w-80 rounded-2xl border border-slate-700/70 bg-slate-900/80 p-4 shadow-2xl backdrop-blur"></section>
+      <section id="stationCard" class="glass-panel station-card hidden"></section>
+
+      <div id="loading" class="loading-overlay">正在加载 RailsMaps 底图与站点…</div>
     </div>
 
-    <!-- Leaflet JS -->
-    <script
-      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-      crossorigin=""
-    ></script>
-
-    <!-- 前端核心逻辑 -->
+    <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
     <script type="module" src="./app.js"></script>
   </body>
 </html>
