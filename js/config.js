@@ -21,17 +21,6 @@ export const LIGHT_POLLUTION_TILE = {
   }
 };
 
-export const LIGHT_POLLUTION_OVERLAY = {
-  url: "https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/VIIRS_CityLights_2012/default/2012-12-31/GoogleMapsCompatible_Level8/{z}/{y}/{x}.jpg",
-  options: {
-    opacity: 0.5,
-    maxZoom: 8,
-    tileSize: 256,
-    attribution:
-      'Night Lights: <a href="https://earthdata.nasa.gov/" target="_blank" rel="noopener noreferrer">NASA EarthData / VIIRS</a>'
-  }
-};
-
 export const BASEMAP = {
   url: "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
   options: {

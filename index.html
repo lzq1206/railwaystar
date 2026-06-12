@@ -3,84 +3,48 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#050816" />
-    <title>China Railway Dark Sky Map | 中国高铁暗夜巡礼地图</title>
-
+    <title>China Railway Dark Sky Map</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
     <link rel="stylesheet" href="./assets/styles.css" />
   </head>
+  <body class="bg-slate-950 text-slate-100">
+    <div id="loading" class="fixed inset-0 z-[9999] flex items-center justify-center bg-slate-950/95">
+      <div class="flex flex-col items-center gap-4">
+        <div class="h-12 w-12 animate-spin rounded-full border-4 border-cyan-400 border-t-transparent"></div>
+        <p class="text-sm tracking-widest text-cyan-300">正在加载铁路与暗夜数据…</p>
+      </div>
+    </div>
 
-  <body class="bg-slate-950 text-slate-100 antialiased">
-    <div class="app-shell">
-      <div id="map"></div>
-      <div id="nightOverlay" class="night-overlay"></div>
-      <div class="map-vignette"></div>
+    <main class="relative h-screen w-screen">
+      <aside class="absolute left-3 top-3 z-[500] w-[320px] max-w-[calc(100vw-24px)] rounded-xl border border-slate-700/80 bg-slate-900/85 p-4 shadow-2xl backdrop-blur">
+        <h1 class="mb-1 text-lg font-semibold text-cyan-300">China Railway Dark Sky Map</h1>
+        <p class="mb-3 text-xs text-slate-300">选择线路并查看暗夜车站排行</p>
 
-      <header class="glass-panel panel-top-left">
-        <div class="flex items-start justify-between gap-3">
-          <div>
-            <div class="badge">RailsMaps Edition</div>
-            <h1 class="mt-2 text-2xl font-semibold text-white">中国铁路光污染地图</h1>
-            <p class="mt-1 text-sm leading-6 text-slate-300">RailsMaps 底图 + 站点标签 + 现有暗夜评分，铁路网络会更完整一些。</p>
-          </div>
-          <span id="statusPill" class="status-pill">Loading…</span>
-        </div>
+        <label class="mb-1 block text-xs text-slate-400" for="line-search">搜索高铁线路</label>
+        <input id="line-search" type="search" placeholder="输入线路名，如：京沪高铁" class="mb-2 w-full rounded border border-slate-700 bg-slate-800 px-3 py-2 text-sm outline-none focus:border-cyan-400" />
+        <select id="line-selector" class="mb-3 w-full rounded border border-slate-700 bg-slate-800 px-3 py-2 text-sm"></select>
 
-        <div class="mt-4 grid grid-cols-3 gap-2">
-          <div class="metric-card">
-            <div id="routeCount" class="metric-value">0</div>
-            <div class="metric-label">线路</div>
-          </div>
-          <div class="metric-card">
-            <div id="stationCount" class="metric-value">0</div>
-            <div class="metric-label">站点</div>
-          </div>
-          <div class="metric-card">
-            <div id="darkestStation" class="metric-value metric-value--sm">—</div>
-            <div class="metric-label">最暗站</div>
-          </div>
-        </div>
-
-        <div class="mt-4 space-y-3">
-          <div>
-            <label for="lineSearch" class="mb-1 block text-xs uppercase tracking-[0.24em] text-slate-400">搜索线路</label>
-            <input id="lineSearch" type="text" placeholder="输入线路名，例如 京沪 / 京广" class="ui-input" />
-          </div>
-          <div>
-            <label for="routeSelect" class="mb-1 block text-xs uppercase tracking-[0.24em] text-slate-400">线路选择</label>
-            <select id="routeSelect" class="ui-select"></select>
-          </div>
-        </div>
-
-        <p id="selectionHint" class="mt-3 text-xs text-slate-400">正在加载线路数据…</p>
-      </header>
-
-      <aside class="glass-panel panel-left-bottom">
-        <section>
-          <div class="section-title">模拟车次</div>
-          <ul id="trainList" class="mt-3 flex flex-wrap gap-2"></ul>
+        <section class="mb-3 rounded border border-slate-700/80 bg-slate-800/60 p-3">
+          <h2 class="mb-2 text-sm font-medium text-cyan-200">模拟车次</h2>
+          <ul id="train-list" class="space-y-1 text-xs text-slate-200"></ul>
         </section>
 
-        <section class="mt-5">
-          <div class="section-title">寻暗者 Top 3</div>
-          <ol id="darkTopList" class="mt-3 space-y-2"></ol>
-        </section>
-
-        <section class="mt-5 rounded-2xl border border-cyan-300/10 bg-cyan-400/5 p-4">
-          <div class="text-xs uppercase tracking-[0.24em] text-cyan-200/80">地图说明</div>
-          <p class="mt-2 text-sm leading-6 text-slate-300">RailsMaps 站点层会直接显示在底图里；你当前选中的路线会以霓虹高亮叠加，暗空站点会额外打星。</p>
+        <section class="rounded border border-slate-700/80 bg-slate-800/60 p-3">
+          <h2 class="mb-2 text-sm font-medium text-cyan-200">暗夜车站 Top 排名</h2>
+          <ol id="dark-station-list" class="space-y-2 text-xs text-slate-200"></ol>
         </section>
       </aside>
 
-      <section id="stationCard" class="glass-panel station-card hidden"></section>
+      <section id="station-panel" class="absolute bottom-3 left-3 z-[500] hidden w-[320px] max-w-[calc(100vw-24px)] rounded-xl border border-slate-700/80 bg-slate-900/90 p-4 shadow-2xl backdrop-blur"></section>
 
-      <div id="loading" class="loading-overlay">正在加载 RailsMaps 底图与站点…</div>
-    </div>
+      <div id="map" class="h-full w-full"></div>
+    </main>
 
-    <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script type="module" src="./app.js"></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+    <script type="module" src="./js/main.js"></script>
   </body>
 </html>

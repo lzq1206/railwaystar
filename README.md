@@ -1,20 +1,26 @@
-# railwaystar
+# RailwayStar
 
-China Railway Dark Sky Map（单页面应用）
+中国高铁暗夜巡礼地图。
 
-## 数据来源（已在代码中引用）
+## 功能
 
-- 铁路车站数据（GitHub）：`undef-i/China-Railway-Station-Database`
-  - https://github.com/undef-i/China-Railway-Station-Database
-- 高铁线路 GeoJSON（项目内 `data/high-speed-railway.json`，支持替换为 GitHub Raw 源）
-- RailsMaps 中国铁路站点/铁路底图：`https://railsmaps.com/zh/china/stations`
-  - 底层采用 RailsMaps / Protomaps 的矢量瓦片服务（`https://tiles.railsmaps.com/basemap/{z}/{x}/{y}`）
-- 光污染叠加图层：NASA VIIRS CityLights 2012（最早的灯光图层，独立叠加在 RailsMaps 底图之上）
-  - https://earthdata.nasa.gov/
+- 自动加载 `./data/high-speed-railway.json`
+- 使用 Leaflet + 深色底图 + NASA VIIRS 夜间灯光叠加
+- 支持线路搜索、线路选择、暗夜站点排行
+- 点击站点查看光污染估值与暗空等级
 
 ## 本地运行
 
+用任意静态服务器打开即可，例如：
+
 ```bash
-python -m http.server 8000
-# 打开 http://localhost:8000
+python3 -m http.server 8000
 ```
+
+然后访问 `http://127.0.0.1:8000/`
+
+## 数据位置
+
+- `./data/high-speed-railway.json`
+- `./data/stations-fallback.json`
+- `./data/light-pollution-reference.json`
