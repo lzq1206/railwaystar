@@ -1,4 +1,4 @@
-import { DATA_SOURCES, LIGHT_POLLUTION_TILE } from "./js/config.js";
+import { DATA_SOURCES, LIGHT_POLLUTION_OVERLAY } from "./js/config.js";
 import { loadData } from "./js/data-loader.js";
 import { estimateLightPollution, getBortleScale, describeSky } from "./js/light-pollution.js";
 
@@ -386,10 +386,10 @@ const createMap = () => {
     if (!map.getSource("night-lights")) {
       map.addSource("night-lights", {
         type: "raster",
-        tiles: [LIGHT_POLLUTION_TILE.url],
-        tileSize: LIGHT_POLLUTION_TILE.options.tileSize,
-        attribution: LIGHT_POLLUTION_TILE.options.attribution,
-        maxzoom: LIGHT_POLLUTION_TILE.options.maxZoom
+        tiles: [LIGHT_POLLUTION_OVERLAY.url],
+        tileSize: 256,
+        attribution: LIGHT_POLLUTION_OVERLAY.options.attribution,
+        maxzoom: 12
       });
     }
 
@@ -400,7 +400,7 @@ const createMap = () => {
           type: "raster",
           source: "night-lights",
           paint: {
-            "raster-opacity": LIGHT_POLLUTION_TILE.options.opacity,
+            "raster-opacity": LIGHT_POLLUTION_OVERLAY.options.opacity,
             "raster-fade-duration": 0,
             "raster-brightness-min": 0.1,
             "raster-brightness-max": 1.08,
