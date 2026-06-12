@@ -5,8 +5,14 @@ export const createMap = () => {
     center: [35.5, 104.0],
     zoom: 5,
     minZoom: 4,
-    preferCanvas: true
+    preferCanvas: true,
+    attributionControl: false
   });
+
+  if (map.attributionControl) {
+    map.attributionControl.setPrefix?.("");
+    map.removeControl(map.attributionControl);
+  }
 
   L.tileLayer(BASEMAP.url, BASEMAP.options).addTo(map);
   L.tileLayer(LIGHT_POLLUTION_TILE.url, LIGHT_POLLUTION_TILE.options).addTo(map);

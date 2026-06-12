@@ -26,8 +26,7 @@ export const BASEMAP = {
   options: {
     subdomains: "1234",
     maxZoom: 19,
-    attribution:
-      '&copy; <a href="https://www.amap.com/" target="_blank" rel="noopener noreferrer">高德地图</a> | &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> contributors'
+    attribution: ""
   }
 };
 
