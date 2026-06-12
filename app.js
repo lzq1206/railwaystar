@@ -404,13 +404,12 @@ const createMap = () => {
         inertia: false
       });
 
-      L.tileLayer.wms(LIGHT_POLLUTION_OVERLAY.url, {
-        ...LIGHT_POLLUTION_OVERLAY.params,
+      L.tileLayer(LIGHT_POLLUTION_OVERLAY.url, {
         opacity: LIGHT_POLLUTION_OVERLAY.options.opacity,
-        tileSize: 256,
+        maxZoom: LIGHT_POLLUTION_OVERLAY.options.maxZoom,
+        tileSize: LIGHT_POLLUTION_OVERLAY.options.tileSize,
+        attribution: LIGHT_POLLUTION_OVERLAY.options.attribution,
         crossOrigin: true,
-        uppercase: true,
-        maxZoom: 12,
         noWrap: true
       }).addTo(state.overlayMap);
     }

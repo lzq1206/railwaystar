@@ -22,18 +22,13 @@ export const LIGHT_POLLUTION_TILE = {
 };
 
 export const LIGHT_POLLUTION_OVERLAY = {
-  url: "https://www.lightpollutionmap.info/geoserver/PostGIS/wms",
-  params: {
-    layers: "PostGIS:SB_2025_raw",
-    styles: "WA_select",
-    format: "image/png",
-    transparent: true,
-    version: "1.1.0",
-    srs: "EPSG:3857"
-  },
+  url: "https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/VIIRS_CityLights_2012/default/2012-12-31/GoogleMapsCompatible_Level8/{z}/{y}/{x}.jpg",
   options: {
-    opacity: 0.68,
-    attribution: 'Light pollution overlay: <a href="https://www.lightpollutionmap.info/" target="_blank" rel="noopener noreferrer">lightpollutionmap.info</a>'
+    opacity: 0.5,
+    maxZoom: 8,
+    tileSize: 256,
+    attribution:
+      'Night Lights: <a href="https://earthdata.nasa.gov/" target="_blank" rel="noopener noreferrer">NASA EarthData / VIIRS</a>'
   }
 };
 
