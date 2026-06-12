@@ -22,10 +22,17 @@ export const LIGHT_POLLUTION_TILE = {
 };
 
 export const LIGHT_POLLUTION_OVERLAY = {
-  url:
-    "https://www.lightpollutionmap.info/geoserver/PostGIS/wms?service=WMS&version=1.1.0&request=GetMap&layers=PostGIS:SB_2025_raw&styles=WA_select&format=image/png&transparent=true&srs=EPSG:3857&width=256&height=256&bbox={bbox-epsg-3857}",
+  url: "https://www.lightpollutionmap.info/geoserver/PostGIS/wms",
+  params: {
+    layers: "PostGIS:SB_2025_raw",
+    styles: "WA_select",
+    format: "image/png",
+    transparent: true,
+    version: "1.1.0",
+    srs: "EPSG:3857"
+  },
   options: {
-    opacity: 0.6,
+    opacity: 0.68,
     attribution: 'Light pollution overlay: <a href="https://www.lightpollutionmap.info/" target="_blank" rel="noopener noreferrer">lightpollutionmap.info</a>'
   }
 };

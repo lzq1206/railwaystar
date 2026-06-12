@@ -9,7 +9,7 @@ China Railway Dark Sky Map（单页面应用）
 - 高铁线路 GeoJSON（项目内 `data/high-speed-railway.json`，支持替换为 GitHub Raw 源）
 - RailsMaps 中国铁路站点/铁路底图：`https://railsmaps.com/zh/china/stations`
   - 底层采用 RailsMaps / Protomaps 的矢量瓦片服务（`https://tiles.railsmaps.com/basemap/{z}/{x}/{y}`）
-- 光污染叠加图层：LightPollutionMap `SB_2025`（叠加在底图之上）
+- 光污染叠加图层：LightPollutionMap `SB_2025_raw` WMS（叠加在 RailsMaps 底图之上，使用独立叶片叠层避免被底图样式吞掉）
   - https://www.lightpollutionmap.info/
 
 ## 本地运行

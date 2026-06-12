@@ -8,6 +8,7 @@ const DEFAULT_ZOOM = 4.6;
 
 const dom = {
   map: document.getElementById("map"),
+  nightOverlay: document.getElementById("nightOverlay"),
   routeSelect: document.getElementById("routeSelect"),
   lineSearch: document.getElementById("lineSearch"),
   trainList: document.getElementById("trainList"),
@@ -29,6 +30,7 @@ const state = {
   selectedLine: null,
   selectedRouteMarkers: [],
   routeLayerReady: false,
+  overlayMap: null,
   visibleLines: []
 };
 
@@ -383,33 +385,34 @@ const createMap = () => {
   map.on("load", () => {
     dom.statusPill.textContent = "RailsMaps tiles live";
 
-    if (!map.getSource("night-lights")) {
-      map.addSource("night-lights", {
-        type: "raster",
-        tiles: [LIGHT_POLLUTION_OVERLAY.url],
-        tileSize: 256,
-        attribution: LIGHT_POLLUTION_OVERLAY.options.attribution,
-        maxzoom: 12
+    if (!state.overlayMap && window.L) {
+      state.overlayMap = L.map(dom.nightOverlay, {
+        zoomControl: false,
+        attributionControl: false,
+        interactive: false,
+        keyboard: false,
+        dragging: false,
+        scrollWheelZoom: false,
+        doubleClickZoom: false,
+        boxZoom: false,
+        touchZoom: false,
+        preferCanvas: true,
+        zoomSnap: 0.1,
+        zoomDelta: 0.5,
+        fadeAnimation: false,
+        zoomAnimation: false,
+        inertia: false
       });
-    }
 
-    if (!map.getLayer("night-lights-overlay")) {
-      map.addLayer(
-        {
-          id: "night-lights-overlay",
-          type: "raster",
-          source: "night-lights",
-          paint: {
-            "raster-opacity": LIGHT_POLLUTION_OVERLAY.options.opacity,
-            "raster-fade-duration": 0,
-            "raster-brightness-min": 0.1,
-            "raster-brightness-max": 1.08,
-            "raster-saturation": -0.12,
-            "raster-contrast": 0.08
-          }
-        },
-        "places"
-      );
+      L.tileLayer.wms(LIGHT_POLLUTION_OVERLAY.url, {
+        ...LIGHT_POLLUTION_OVERLAY.params,
+        opacity: LIGHT_POLLUTION_OVERLAY.options.opacity,
+        tileSize: 256,
+        crossOrigin: true,
+        uppercase: true,
+        maxZoom: 12,
+        noWrap: true
+      }).addTo(state.overlayMap);
     }
 
     if (!map.getSource("selected-route")) {
@@ -450,6 +453,16 @@ const createMap = () => {
     if (state.selectedLine && map.getSource("selected-route")) {
       map.getSource("selected-route").setData(state.selectedLine);
     }
+
+    const syncOverlay = () => {
+      if (!state.overlayMap) return;
+      const center = map.getCenter();
+      state.overlayMap.setView([center.lat, center.lng], map.getZoom(), { animate: false });
+    };
+
+    syncOverlay();
+    map.on("move", syncOverlay);
+    map.on("zoom", syncOverlay);
   });
 
   return map;
